@@ -1,5 +1,5 @@
 ## Filtering 1: Comparing Land prices from portugal and california. (box plot?)
-land_prices = totalarea_sorted.loc[totalarea_sorted['frame'] != 'melbourne', ['price', 'TotalArea', 'frame']]
+land_prices = totalarea_sorted.loc[(totalarea_sorted['frame'] != 'melbourne') & (totalarea_sorted['home_type'] != 'Land'), ['price', 'TotalArea', 'frame']]
 # Calculates the price of land, per sqft, and reassigns back to 'price'. Now 'price' contains price per sqft
 land_prices['price'] = land_prices['price'] / land_prices['TotalArea']
 
@@ -32,4 +32,4 @@ year_built = merged.loc[(merged['frame'] == 'california') &
             ['price', 'year_built']]
 
 # Filtering 5: How many parking spots does Multi-Unit Housing usually have? (Histogram?)
-multi_parking = parking_sorted.loc[parking_sorted['home_type'] != 'Multi-Unit Housing', ['frame', 'parking_spaces']]
+multi_parking = parking_sorted.loc[parking_sorted['home_type'] == 'Multi-Unit Housing', ['frame', 'parking_spaces']]
