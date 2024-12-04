@@ -151,38 +151,19 @@ def cleansortMergedData():
   merged['levels'] = pd.to_numeric(merged['levels'])
 
   # Dropping all data where living_area is 0, therefore invalid
-  merged_copy.drop(merged_copy[merged_copy['living_area'] == 0.0].index, inplace=True)
+  merged.drop(merged_copy[merged_copy['living_area'] == 0.0].index, inplace=True)
 
   # New dataframe sorted by number of bathrooms
-  bathroom_sorted = merged_copy.sort_values(by=['bathrooms'])
-  bathroom_sorted.head()
+  bathroom_sorted = merged.sort_values(by=['bathrooms'])
 
   # New dataframe sorted by bedrooms
-  bedroom_sorted = merged_copy.sort_values(by=['bedrooms'])
-  bathroom_sorted.head()
+  bedroom_sorted = merged.sort_values(by=['bedrooms'])
 
   # New dataframe sorted by year_built
-  yearbuilt_sorted = merged_copy.sort_values(by=['year_built'])
-  bathroom_sorted.head()
+  yearbuilt_sorted = merged.sort_values(by=['year_built'])
 
   # New dataframe sorted by living_area
-  livingarea_sorted = merged_copy.sort_values(by=['living_area'])
-  livingarea_sorted.head(100)
+  livingarea_sorted = merged.sort_values(by=['living_area'])
 
-
-  #For Filtering, you are free to modify/add/delete those as you see fit for visualization!
-
-  # Filtering 1: Comparing Land prices from portugal and california
-  land_prices = merged.loc[merged['frame'] != 'melbourne', ['price', 'TotalArea', 'frame']]
-  
-  # Filtering 2: Checking correlation between price and elevator availability in Multi-Unit Housing across all regions
-  elev_aval = merged.loc[merged['home_type'] == 'Multi-Unit Housing', ['Elevator', 'price']]
-  
-  # Filtering 3: Checking correlation between # of parking spaces vs. price in each region
-  park_aval = merged[['parking_spaces', 'price', 'frame']]
-  
-  # Filtering 4: Impact of year_built on price for 2-bedroom Multi-Unit Housing based in California
-  year_built = merged.loc[(merged['frame'] == 'california') & 
-              (merged['bedrooms'] == 2) &
-              (merged['home_type'] == 'Multi-Unit Housing'),
-              ['price', 'year_built']]
+  # New dataframe sorted by TotalArea
+  totalarea_sorted = merged.sort_values(by=['TotalArea'])
