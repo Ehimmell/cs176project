@@ -151,19 +151,29 @@ def cleansortMergedData():
   merged['levels'] = pd.to_numeric(merged['levels'])
 
   # Dropping all data where living_area is 0, therefore invalid
-  merged.drop(merged_copy[merged_copy['living_area'] == 0.0].index, inplace=True)
+  merged.drop(merged[merged['living_area'] == 0.0].index, inplace=True)
 
   # New dataframe sorted by number of bathrooms
   bathroom_sorted = merged.sort_values(by=['bathrooms'])
+  bathroom_sorted.head()
 
   # New dataframe sorted by bedrooms
   bedroom_sorted = merged.sort_values(by=['bedrooms'])
+  bathroom_sorted.head()
 
   # New dataframe sorted by year_built
   yearbuilt_sorted = merged.sort_values(by=['year_built'])
+  bathroom_sorted.head()
 
   # New dataframe sorted by living_area
   livingarea_sorted = merged.sort_values(by=['living_area'])
+  livingarea_sorted.head(100)
+
+  # New dataframe sorted by parking_spaces
+  parking_sorted = merged.sort_values(by=['parking_spaces'])
+  parking_sorted.head(100)
 
   # New dataframe sorted by TotalArea
   totalarea_sorted = merged.sort_values(by=['TotalArea'])
+  # Making sure TotalArea is all positive
+  totalarea_sorted['TotalArea'] = abs(totalarea_sorted['TotalArea'])
