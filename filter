@@ -8,8 +8,6 @@ land_prices['price'] = land_prices['price'] / land_prices['TotalArea']
 elev_aval = merged.loc[merged['home_type'] == 'Multi-Unit Housing', ['Elevator', 'price']]
 noelevator = elev_aval.loc[elev_aval['Elevator'] == False, 'price'].mean()
 elevator = elev_aval.loc[elev_aval['Elevator'] == True, 'price'].mean()
-print(elevator, noelevator)
-
 
 ## Filtering 3: Average price by number of parking spaces for Multi-Unit Housing in Melbourne (plot?)
 melb_parking = parking_sorted.loc[
