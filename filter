@@ -1,0 +1,37 @@
+## Filtering 1: Comparing Land prices from portugal and california. (box plot?)
+land_prices = totalarea_sorted.loc[totalarea_sorted['frame'] != 'melbourne', ['price', 'TotalArea', 'frame']]
+# Calculates the price of land, per sqft, and reassigns back to 'price'. Now 'price' contains price per sqft
+land_prices['price'] = land_prices['price'] / land_prices['TotalArea']
+
+## Filtering 2: Checking the correlation between price and elevator availability in Multi-Unit Housing across all regions (Bar plot?)
+# noelevator contains mean of prices of Multi-Housing Units with no elevators, elevators vice versa
+elev_aval = merged.loc[merged['home_type'] == 'Multi-Unit Housing', ['Elevator', 'price']]
+noelevator = elev_aval.loc[elev_aval['Elevator'] == False, 'price'].mean()
+elevator = elev_aval.loc[elev_aval['Elevator'] == True, 'price'].mean()
+print(elevator, noelevator)
+
+
+## Filtering 3: Average price by number of parking spaces for Multi-Unit Housing in Melbourne (plot?)
+melb_parking = parking_sorted.loc[
+    (parking_sorted['frame'] == 'melbourne') & 
+    (parking_sorted['home_type'] != 'House'), 
+    ['parking_spaces', 'price']
+]
+# Removing the outlier
+melb_parking.drop(melb_parking[melb_parking['parking_spaces'] == 7].index, inplace=True)
+
+# Getting average price per number of parking spaces
+line_data = melb_parking.groupby('parking_spaces')['price'].mean().reset_index()
+
+# Sorting the data by parking_spaces
+line_data.sort_values(by='parking_spaces', inplace=True)
+
+
+# Filtering 4: Impact of year_built on price for [2-bedroom / Multi-Unit Housing / based in California] (scatter plot?)
+year_built = merged.loc[(merged['frame'] == 'california') & 
+            (merged['bedrooms'] == 2) &
+            (merged['home_type'] == 'Multi-Unit Housing'),
+            ['price', 'year_built']]
+
+# Filtering 5: How many parking spots does Multi-Unit Housing usually have? (Histogram?)
+multi_parking = parking_sorted.loc[parking_sorted['home_type'] != 'Multi-Unit Housing', ['frame', 'parking_spaces']]
