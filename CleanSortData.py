@@ -155,24 +155,15 @@ def cleansortMergedData():
 
   # New dataframe sorted by number of bathrooms
   bathroom_sorted = merged.sort_values(by=['bathrooms'])
-  bathroom_sorted.head()
-
   # New dataframe sorted by bedrooms
   bedroom_sorted = merged.sort_values(by=['bedrooms'])
-  bathroom_sorted.head()
-
   # New dataframe sorted by year_built
   yearbuilt_sorted = merged.sort_values(by=['year_built'])
-  bathroom_sorted.head()
-
   # New dataframe sorted by living_area
   livingarea_sorted = merged.sort_values(by=['living_area'])
-  livingarea_sorted.head(100)
-
   # New dataframe sorted by parking_spaces
   parking_sorted = merged.sort_values(by=['parking_spaces'])
-  parking_sorted.head(100)
-
+  
   # New dataframe sorted by TotalArea
   totalarea_sorted = merged.sort_values(by=['TotalArea'])
   # Making sure TotalArea is all positive
